@@ -1,3 +1,7 @@
+variable "domain" {
+  type = string
+}
+
 job "semaphore" {
 
   group "semaphore" {
@@ -11,7 +15,7 @@ job "semaphore" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=HOST(`semaphore.lan`)",
+        "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=HOST(`${var.domain}`)",
         "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls=true",
       ]
     }
