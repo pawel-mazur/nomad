@@ -42,9 +42,10 @@ job "httpd" {
       template {
         data = <<EOH
 <p><strong>It's Works!</strong></p>
-<p>Allocation: {{ env "NOMAD_ALLOC_ID" }}
-<p>Short: {{ env "NOMAD_SHORT_ALLOC_ID" }}
-<p>Index: {{ env "NOMAD_ALLOC_INDEX" }}
+<p>Allocation: {{ env "NOMAD_ALLOC_ID" }}</p>
+<p>Short: {{ env "NOMAD_SHORT_ALLOC_ID" }}</p>
+<p>Index: {{ env "NOMAD_ALLOC_INDEX" }}</p>
+<p>Server: {{ env "NOMAD_IP_http" }}</p>
 <p>Version: 11</p>
  EOH
         destination = "local/htdocs/index.html"
@@ -57,7 +58,6 @@ job "httpd" {
         destination = "local/htdocs/status"
       }
 
-
       service {
         port = "http"
         tags = [
@@ -65,7 +65,7 @@ job "httpd" {
 
           "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=Host(`${var.domain}`)",
           "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls.certresolver=${var.resolver}",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.entryPoints=https",
+          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.entryPoints=websecure",
 
           "traefik.http.routers.${NOMAD_JOB_NAME}-status.rule=Host(`${var.domain}`) && Path(`/status`)",
           "traefik.http.routers.${NOMAD_JOB_NAME}-status.tls.certresolver=${var.resolver}",

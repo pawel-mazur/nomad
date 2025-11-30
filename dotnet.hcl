@@ -35,7 +35,7 @@ job "dotnet" {
           "traefik.enable=true",
           "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=Host(`${var.domain}`)",
           "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls.certresolver=${var.resolver}",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.entryPoints=https",
+          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.entryPoints=websecure",
         ]
       }
     }

@@ -15,8 +15,8 @@ job "semaphore" {
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=HOST(`${var.domain}`)",
-        "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls=true",
+        "traefik.http.routers.${NOMAD_JOB_NAME}.rule=HOST(`${var.domain}`)",
+        "traefik.http.routers.${NOMAD_JOB_NAME}.tls=true",
       ]
     }
 
