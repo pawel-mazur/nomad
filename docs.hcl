@@ -1,8 +1,4 @@
-variable "domain-lan" {
-  type = string
-}
-
-variable "domain-wan" {
+variable "domain" {
   type = string
 }
 
@@ -34,12 +30,9 @@ job "docs" {
         port = "http"
         tags = [
           "traefik.enable=true",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}-lan.rule=HOST(`${var.domain-lan}`)",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}-lan.tls=true",
-
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}-wan.rule=HOST(`${var.domain-wan}`)",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}-wan.tls.certResolver=dns",
-          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}-wan.tls=true",
+          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.rule=HOST(`${var.domain}`)",
+          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls.certResolver=dns",
+          "traefik.http.routers.${NOMAD_JOB_NAME}-${NOMAD_TASK_NAME}.tls=true",
         ]
       }
     }
