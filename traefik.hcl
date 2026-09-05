@@ -78,6 +78,8 @@ job "traefik" {
 
       template {
         data        = <<EOF
+log:
+  level: INFO
 accessLog: {}
 ping:
   entrypoint: public
